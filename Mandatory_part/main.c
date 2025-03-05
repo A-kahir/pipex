@@ -94,7 +94,7 @@ int	main(int argc, char **argv)
 	{
 		pid2 = fork();
 		if (pid2 == 0)
-		execute_cmd2(pid2, outf, pipe_fd, argv);
+			execute_cmd2(pid2, outf, pipe_fd, argv);
 		else if (pid2 > 0)
 		{
 			close(pipe_fd[0]);
