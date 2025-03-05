@@ -88,13 +88,25 @@ int	main(int argc, char **argv)
 	if (pipe(pipe_fd) == -1)
 		exit(1);
 	pid1 = fork();
-	execute_cmd1(pid1, inf, pipe_fd, argv);
-	pid2 = fork();
-	execute_cmd2(pid2, outf, pipe_fd, argv);
-	close(pipe_fd[0]);
-	close(pipe_fd[1]);
-	close(inf);
-	close(outf);
-	waitpid(pid1, NULL, 0);
-	waitpid(pid2, NULL, 0);
+	if (pid1 == 0)
+		execute_cmd1(pid1, inf, pipe_fd, argv);
+	else if (pid1 > 0)
+	{
+		pid2 = fork();
+		if (pid2 == 0)
+		execute_cmd2(pid2, outf, pipe_fd, argv);
+		else if (pid2 > 0)
+		{
+			close(pipe_fd[0]);
+			close(pipe_fd[1]);
+			close(inf);
+			close(outf);
+			waitpid(pid1, NULL, 0);
+			waitpid(pid2, NULL, 0);
+		}
+		else
+			exit(1);
+	}
+	else
+		exit(1);
 }
