@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "cwd": "/mnt/homes/akahir/Desktop/pipex/Mandatory_part",
+      "program": "/mnt/homes/akahir/Desktop/pipex/Mandatory_part/build/Debug/outDebug"
+    }
+  ]
+}
